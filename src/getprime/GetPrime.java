@@ -15,13 +15,14 @@ import java.util.Scanner;
 
 public class GetPrime {
 
-    int currentNumber, counter, N;
+    int currentNumber, counter, N, sieveOfEratosthenes;
     List<Integer> list;
 
     public GetPrime(int n){
         this.N = n;
         this.currentNumber = 7;
         this.counter = 0;
+        this.sieveOfEratosthenes = 0;
         this.list = new LinkedList<Integer>();
     }
 
@@ -29,11 +30,6 @@ public class GetPrime {
     private int getCurrentNumber(){
         return this.currentNumber;
     }
-
-    /*
-    private int getCounter(){
-        return this.counter;
-    }*/
 
     private int getQueryNumber(){
         return this.N;
@@ -44,9 +40,19 @@ public class GetPrime {
     private void setNextNumber(){
         if(counter == 3){
             this.currentNumber += 4;
-        }else{
+        }
+        else{
             this.currentNumber += 2;
         }
+
+        //recursion method to exclude multiples of 3 (similar to sieve of eratosthenes)
+        if (currentNumber % 3 == 0) {
+            this.setNextCounter();
+            this.setNextNumber();
+        }else{
+            this.setNextCounter();
+        }
+
     }
 
     //counter used to determine when to skip number ending in 5
@@ -58,6 +64,15 @@ public class GetPrime {
         }
     }
 
+    /*private void setNextSieveOfEratosthenes(){
+        if(this.counter ==0){
+            this.sieveOfEratosthenes ++;
+        }
+        if(this.sieveOfEratosthenes > 2){
+            this.sieveOfEratosthenes = 0;
+        }
+    }*/
+
     //if the user input number is >=7 it will add 2, 3, 5 onto the list of prime numbers and iterate from 7
     public void setInitialList(){
         this.list.add(2);
@@ -68,13 +83,15 @@ public class GetPrime {
     //checks if number in question is a prime by iterating through
     public boolean isPrime(int p){
         for(int element : list){
+            
             /* Code optimization. Algorithm to increase efficiency, Especially for larger numbers.
              Only need to iterate below element <= p. Getting error. Will implement later.
             if(element > Math.sqrt(p)){
                 break;
             }*/
-            System.out.println("element = "  + element + "\tRoot N = " + Math.sqrt(p) + "\tP = " + p + "\tcounter = " + this.counter);
-            System.out.println(element <= Math.sqrt(p));
+            //System.out.println("element = "  + element + "\tRoot N = " + Math.sqrt(p) + "\tP = " + p + "\tcounter = " + this.counter);
+            //System.out.println(element <= Math.sqrt(p));
+
             if(!(element <= Math.sqrt(p))){
                 break;
             }
@@ -127,14 +144,14 @@ public class GetPrime {
                         if(gp.isPrime(gp.getCurrentNumber())){
                             gp.addCurrentToList(gp.getCurrentNumber());
                         }
+                        
                         gp.setNextNumber();
-                        gp.setNextCounter();
                     }
                 }
 
                 System.out.println();
                 System.out.println(gp.list.toString());
-                System.out.println("\nAll numbers have been found.");
+                System.out.println("\n" + gp.list.size() + " numbers have been found.");
 
                 //Checks if user wants to enter another number
                 boolean miniLoop = true;
