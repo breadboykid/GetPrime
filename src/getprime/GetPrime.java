@@ -67,10 +67,12 @@ public class GetPrime {
     public boolean isPrime(int p){
         for(int element : list){
             /* Code optimization. Algorithm to increase efficiency, Especially for larger numbers.
-             Only need to iterate below element <= Sqrt(p). Getting error. Will implement later.
+             Only need to iterate below element <= p. Getting error. Will implement later.
             if(element > Math.sqrt(p)){
                 break;
             }*/
+            System.out.println("element = "  + element + "\tRoot N = " + Math.sqrt(p) + "\tP = " + p + "\tcounter = " + this.counter);
+            System.out.println(element <= Math.sqrt(p));
             if(p%element == 0) {
                 return false;
             }
@@ -83,12 +85,13 @@ public class GetPrime {
     }
 
     public static void main(String[] args) throws InputMismatchException {
-        Scanner scan = new Scanner(System.in);
+
         boolean play = true;
         int query;
 
-        while(play){
+        do{
 
+            Scanner scan = new Scanner(System.in);
             System.out.println("Please enter a number n to output all prime numbers from 0 to n: ");
 
             try{
@@ -99,19 +102,19 @@ public class GetPrime {
 
 
                 if(gp.getQueryNumber() < 2){
-                    System.out.println("No Prime numbers found");
+                    System.out.println("No Prime numbers found: ");
                 }else if(gp.getQueryNumber() >= 2 && gp.getQueryNumber() < 3){
                     gp.list.add(2);
-                    System.out.println("Prime numbers is: " + gp.list.toString());
+                    System.out.println("Prime numbers are: ");
                 }else if(gp.getQueryNumber() >= 3 && gp.getQueryNumber() < 5){
                     gp.list.add(2);
                     gp.list.add(3);
-                    System.out.println("Prime numbers is: " + gp.list.toString());
+                    System.out.println("Prime numbers are: ");
                 }else if(gp.getQueryNumber() >= 5 && gp.getQueryNumber() < 7){
                     gp.list.add(2);
                     gp.list.add(3);
                     gp.list.add(5);
-                    System.out.println("Prime numbers is: " + gp.list.toString());
+                    System.out.println("Prime numbers are: ");
                 }else{
                     gp.setInitialList();
                     while(gp.getCurrentNumber() <= gp.getQueryNumber()){
@@ -154,12 +157,12 @@ public class GetPrime {
                 }
 
             }catch(InputMismatchException e){//Catches input mismatch for numnber input and with loop round while loop to try again
-                System.out.println("Invalid input: " + e);
+                System.out.println("Invalid input: " + e + "\n");
             }
 
 
 
-        }
+        }while(play);
 
     }
 }
