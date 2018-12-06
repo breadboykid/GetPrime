@@ -67,7 +67,7 @@ public class GetPrime {
     public boolean isPrime(int p){
         for(int element : list){
             /* Code optimization. Algorithm to increase efficiency, Especially for larger numbers.
-             Only need to iterate below element <= p. Getting error. Will implement later.
+             Only need to iterate below element <= Sqrt(p). Getting error. Will implement later.
             if(element > Math.sqrt(p)){
                 break;
             }*/
