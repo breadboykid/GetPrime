@@ -40,16 +40,18 @@ public class GetPrime {
     }
 
     //Setters
+    //this sets the next number to check if prime. Code written here excludes all numbers ending in 5 excl "5"
     private void setNextNumber(){
-        if(counter == 4){
+        if(counter == 3){
             this.currentNumber += 4;
         }else{
             this.currentNumber += 2;
         }
     }
 
+    //counter used to determine when to skip number ending in 5
     private void setNextCounter(){
-        if(this.counter == 4){
+        if(this.counter == 3){
             this.counter = 0;
         }else{
             this.counter++;
@@ -73,6 +75,9 @@ public class GetPrime {
             }*/
             System.out.println("element = "  + element + "\tRoot N = " + Math.sqrt(p) + "\tP = " + p + "\tcounter = " + this.counter);
             System.out.println(element <= Math.sqrt(p));
+            if(!(element <= Math.sqrt(p))){
+                break;
+            }
             if(p%element == 0) {
                 return false;
             }
@@ -121,10 +126,9 @@ public class GetPrime {
                         //checks if current number is a prime
                         if(gp.isPrime(gp.getCurrentNumber())){
                             gp.addCurrentToList(gp.getCurrentNumber());
-                        }else{//iterates to next query to check on next loop
-                            gp.setNextCounter();
-                            gp.setNextNumber();
                         }
+                        gp.setNextNumber();
+                        gp.setNextCounter();
                     }
                 }
 
