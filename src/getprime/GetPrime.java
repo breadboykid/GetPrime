@@ -64,15 +64,6 @@ public class GetPrime {
         }
     }
 
-    /*private void setNextSieveOfEratosthenes(){
-        if(this.counter ==0){
-            this.sieveOfEratosthenes ++;
-        }
-        if(this.sieveOfEratosthenes > 2){
-            this.sieveOfEratosthenes = 0;
-        }
-    }*/
-
     //if the user input number is >=7 it will add 2, 3, 5 onto the list of prime numbers and iterate from 7
     public void setInitialList(){
         this.list.add(2);
@@ -83,15 +74,6 @@ public class GetPrime {
     //checks if number in question is a prime by iterating through
     public boolean isPrime(int p){
         for(int element : list){
-            
-            /* Code optimization. Algorithm to increase efficiency, Especially for larger numbers.
-             Only need to iterate below element <= p. Getting error. Will implement later.
-            if(element > Math.sqrt(p)){
-                break;
-            }*/
-            //System.out.println("element = "  + element + "\tRoot N = " + Math.sqrt(p) + "\tP = " + p + "\tcounter = " + this.counter);
-            //System.out.println(element <= Math.sqrt(p));
-
             if(!(element <= Math.sqrt(p))){
                 break;
             }
@@ -144,8 +126,9 @@ public class GetPrime {
                         if(gp.isPrime(gp.getCurrentNumber())){
                             gp.addCurrentToList(gp.getCurrentNumber());
                         }
-                        
                         gp.setNextNumber();
+                        //gp.setNextCounter();
+                        //gp.setNextSieveOfEratosthenes();
                     }
                 }
 
@@ -177,7 +160,7 @@ public class GetPrime {
                     }
                 }
 
-            }catch(InputMismatchException e){//Catches input mismatch for numnber input and with loop round while loop to try again
+            }catch(InputMismatchException e){//Catches input mismatch for number input and with loop round while loop to try again play=true
                 System.out.println("Invalid input: " + e + "\n");
             }
 
